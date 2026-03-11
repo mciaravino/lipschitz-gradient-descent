@@ -13,7 +13,7 @@ constant of a function, with graph construction and geometric slit visualization
 - `hl_plot_graph_edges.m` — Graph edge plotting
 
 ## Presentation
-Slides in progress — [view on Overleaf](https://www.overleaf.com/read/zvsbtpbmxrsb#347a7d)
+Slides in progress — [view draft](./Lipschitz_Gradient_Descent_Project.pdf)
 
 ## Requirements
 MATLAB (R2021a or later recommended)
