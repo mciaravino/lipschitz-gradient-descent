@@ -1,5 +1,5 @@
-%% march4Script_gd_loop.m
-% Coordinate descent optimization of Lip(F) for N = 2..5
+%% drivingScript.m
+% Coordinate descent optimization of Lip(F) for N = 2..4
 % in a Hakobyan-Li slit domain.
 %
 % Uses sparse distance computation to avoid memory overflow:
@@ -13,11 +13,13 @@
 %   hl_build_graph_from_points.m
 %   gd_get_row.m
 %   gd_dlookup.m
+%   gd_compute_lip.m
+%   gd_local_lip.m
 
 clear; clc;
 
 %% Parameters
-N_values  = 2:4; %Run a single N value by typing N:N
+N_values  = 2:3;  % Run a single N value by typing N:N
 max_iters = 100;
 
 %% Storage
@@ -58,8 +60,6 @@ for ni = 1:length(N_values)
     end
 
     %% Distance cache
-    % Stores one distance row per source node, computed on demand.
-    % Never stores the full n x n matrix.
     dist_cache = containers.Map('KeyType','int32','ValueType','any');
 
     %% Build vertical filling (initial guess)
@@ -135,18 +135,7 @@ for ni = 1:length(N_values)
     fprintf('  Done: %.3f sec  (cache size: %d rows)\n', toc, dist_cache.Count);
 
     %% Compute initial Lip
-    lip_init = 0; wu_init = -1; wv_init = -1;
-    for k = 1:size(E,1)
-        u = E(k,1); v = E(k,2);
-        d_dom = norm(pts(u,:) - pts(v,:));
-        if d_dom < 1e-12, continue; end
-        d_img = gd_dlookup(F(u), F(v), G, dist_cache);
-        if isinf(d_img), continue; end
-        ratio = d_img / d_dom;
-        if ratio > lip_init
-            lip_init = ratio; wu_init = u; wv_init = v;
-        end
-    end
+    [lip_init, ~, ~] = gd_compute_lip(F, E, pts, G, dist_cache);
     fprintf('Initial Lip(F) = %.4f\n', lip_init);
 
     %% Coordinate descent
@@ -163,20 +152,9 @@ for ni = 1:length(N_values)
         for ii = 1:length(idx_order)
             u    = idx_order(ii);
             fu   = F(u);
-            nbrs = adj{u};
 
-            % Current local worst ratio for edges incident to u
-            current_worst = 0;
-            for j = 1:length(nbrs)
-                v     = nbrs(j);
-                d_dom = norm(pts(u,:) - pts(v,:));
-                if d_dom < 1e-12, continue; end
-                d_img = gd_dlookup(F(u), F(v), G, dist_cache);
-                if isinf(d_img), continue; end
-                current_worst = max(current_worst, d_img / d_dom);
-            end
+            current_worst = gd_local_lip(u, F, adj, pts, G, dist_cache);
 
-            % Try current image node and each of its graph neighbors
             candidates = [fu, adj{fu}];
             best_cost  = current_worst;
             best_node  = fu;
@@ -185,18 +163,9 @@ for ni = 1:length(N_values)
                 cand = candidates(c);
                 if is_boundary(cand), continue; end
 
-                % Ensure candidate distance row is cached
                 gd_get_row(cand, G, dist_cache);
-
-                tentative_worst = 0;
-                for j = 1:length(nbrs)
-                    v     = nbrs(j);
-                    d_dom = norm(pts(u,:) - pts(v,:));
-                    if d_dom < 1e-12, continue; end
-                    d_img = gd_dlookup(cand, F(v), G, dist_cache);
-                    if isinf(d_img), continue; end
-                    tentative_worst = max(tentative_worst, d_img / d_dom);
-                end
+                F(u) = cand;
+                tentative_worst = gd_local_lip(u, F, adj, pts, G, dist_cache);
 
                 if tentative_worst < best_cost
                     best_cost = tentative_worst;
@@ -211,16 +180,7 @@ for ni = 1:length(N_values)
         end
 
         % Recompute global Lip after full sweep
-        lip_curr = 0;
-        for k = 1:size(E,1)
-            u = E(k,1); v = E(k,2);
-            d_dom = norm(pts(u,:) - pts(v,:));
-            if d_dom < 1e-12, continue; end
-            d_img = gd_dlookup(F(u), F(v), G, dist_cache);
-            if isinf(d_img), continue; end
-            lip_curr = max(lip_curr, d_img / d_dom);
-        end
-
+        [lip_curr, ~, ~] = gd_compute_lip(F, E, pts, G, dist_cache);
         lip_history(iter+1) = lip_curr;
         fprintf('  Iter %3d:  Lip = %.4f  (swaps: %d)\n', iter, lip_curr, n_swaps);
 
