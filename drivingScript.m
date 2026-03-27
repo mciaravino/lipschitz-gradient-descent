@@ -2,10 +2,11 @@
 % Coordinate descent optimization of Lip(F) for N = 2..4
 % in a Hakobyan-Li slit domain.
 %
-% Uses sparse distance computation to avoid memory overflow:
-%   - gd_get_row(src, G, cache) computes and caches one distance row
-%   - gd_dlookup(i, j, G, cache) retrieves distance using the cache
-%   - No full n x n distance matrix is ever stored
+% Key fix: Lipschitz computation now includes cross-slit pairs --
+% nodes that straddle a slit horizontally. These are NOT graph edges
+% (correctly excluded from the graph) but are close in Euclidean
+% distance and far in intrinsic distance, making them the critical
+% pairs for detecting high Lipschitz ratios.
 %
 % Requires in same directory:
 %   hl_draw_slits_iter.m
@@ -19,8 +20,9 @@
 clear; clc;
 
 %% Parameters
-N_values  = 2:3;  % Run a single N value by typing N:N
+N_values  = 2:4;  % Run a single N value by typing N:N
 max_iters = 100;
+MaxN      = 5;    % Grid resolution — increase for finer grid, decrease for speed
 
 %% Storage
 results = zeros(length(N_values), 3);  % [N, lip_init, lip_final]
@@ -34,8 +36,8 @@ for ni = 1:length(N_values)
 
     %% Build domain
     slits = hl_draw_slits_iter(r, N, 'DrawGrid', false);
-    pts   = hl_overlay_grid_with_slit_holes(slits, N, 'MaxN', 6);
-    G     = hl_build_graph_from_points(pts);
+    pts   = hl_overlay_grid_with_slit_holes(slits, N, 'MaxN', MaxN);
+    G     = hl_build_graph_from_points(pts, slits);
     n     = size(pts, 1);
 
     %% Boundary and interior nodes
@@ -50,6 +52,11 @@ for ni = 1:length(N_values)
     top_bnd    = boundary_idx(abs(pts(boundary_idx,2) - 1) < tol);
     bottom_bnd = boundary_idx(abs(pts(boundary_idx,2))     < tol);
 
+    %% Grid spacing
+    dx = min(diff(unique(pts(:,1))));
+    dy = min(diff(unique(pts(:,2))));
+    h  = min(dx, dy);
+
     %% Precompute edge list and adjacency list
     E   = G.Edges.EndNodes;
     adj = cell(n, 1);
@@ -58,6 +65,41 @@ for ni = 1:length(N_values)
         adj{u} = [adj{u}, v];
         adj{v} = [adj{v}, u];
     end
+
+    %% Build cross-slit pairs
+    % Nodes that straddle a slit horizontally: close in Euclidean distance
+    % but separated by the slit obstacle, so intrinsically far apart.
+    % These pairs are deliberately excluded from the graph but must be
+    % included in the Lipschitz computation.
+    fprintf('Building cross-slit pairs...\n');
+    CS      = zeros(0, 2);
+    cs_tol  = h * 1.5;
+    cs_adj  = cell(n, 1);  % cross-slit neighbors per node
+
+    for k = 1:numel(slits)
+        sx  = slits(k).x;
+        sy0 = slits(k).y0;
+        sy1 = slits(k).y1;
+
+        left_idx  = find(abs(pts(:,1) - (sx - h)) < h*0.6 & ...
+                         pts(:,2) >= sy0 - cs_tol & pts(:,2) <= sy1 + cs_tol);
+        right_idx = find(abs(pts(:,1) - (sx + h)) < h*0.6 & ...
+                         pts(:,2) >= sy0 - cs_tol & pts(:,2) <= sy1 + cs_tol);
+
+        for li = 1:length(left_idx)
+            for ri = 1:length(right_idx)
+                if abs(pts(left_idx(li),2) - pts(right_idx(ri),2)) < h*0.6
+                    u = left_idx(li);
+                    v = right_idx(ri);
+                    CS(end+1,:) = [u, v];
+                    cs_adj{u}   = [cs_adj{u}, v];
+                    cs_adj{v}   = [cs_adj{v}, u];
+                end
+            end
+        end
+    end
+
+    fprintf('  Cross-slit pairs: %d\n', size(CS,1));
 
     %% Distance cache
     dist_cache = containers.Map('KeyType','int32','ValueType','any');
@@ -71,7 +113,6 @@ for ni = 1:length(N_values)
         F(boundary_idx(i)) = boundary_idx(i);
     end
 
-    % Find (b_node, t_node) pair for each interior node
     bt_pairs = zeros(length(interior_idx), 2);
     for i = 1:length(interior_idx)
         u  = interior_idx(i);
@@ -81,14 +122,12 @@ for ni = 1:length(N_values)
         bt_pairs(i,:) = [bottom_bnd(bi), top_bnd(ti)];
     end
 
-    % Cache distance rows for all unique bottom nodes
     unique_bnodes = unique(bt_pairs(:,1));
     fprintf('  Caching %d bottom-node distance rows...\n', length(unique_bnodes));
     for k = 1:length(unique_bnodes)
         gd_get_row(unique_bnodes(k), G, dist_cache);
     end
 
-    % Compute shortest paths, caching per unique (b,t) pair
     path_cache = containers.Map('KeyType','char','ValueType','any');
 
     for i = 1:length(interior_idx)
@@ -134,8 +173,8 @@ for ni = 1:length(N_values)
     end
     fprintf('  Done: %.3f sec  (cache size: %d rows)\n', toc, dist_cache.Count);
 
-    %% Compute initial Lip
-    [lip_init, ~, ~] = gd_compute_lip(F, E, pts, G, dist_cache);
+    %% Compute initial Lip (includes cross-slit pairs)
+    [lip_init, ~, ~] = gd_compute_lip(F, E, CS, pts, G, dist_cache);
     fprintf('Initial Lip(F) = %.4f\n', lip_init);
 
     %% Coordinate descent
@@ -153,7 +192,8 @@ for ni = 1:length(N_values)
             u    = idx_order(ii);
             fu   = F(u);
 
-            current_worst = gd_local_lip(u, F, adj, pts, G, dist_cache);
+            % Local cost includes both graph neighbors and cross-slit partners
+            current_worst = gd_local_lip(u, F, adj, cs_adj{u}, pts, G, dist_cache);
 
             candidates = [fu, adj{fu}];
             best_cost  = current_worst;
@@ -165,7 +205,7 @@ for ni = 1:length(N_values)
 
                 gd_get_row(cand, G, dist_cache);
                 F(u) = cand;
-                tentative_worst = gd_local_lip(u, F, adj, pts, G, dist_cache);
+                tentative_worst = gd_local_lip(u, F, adj, cs_adj{u}, pts, G, dist_cache);
 
                 if tentative_worst < best_cost
                     best_cost = tentative_worst;
@@ -180,7 +220,7 @@ for ni = 1:length(N_values)
         end
 
         % Recompute global Lip after full sweep
-        [lip_curr, ~, ~] = gd_compute_lip(F, E, pts, G, dist_cache);
+        [lip_curr, ~, ~] = gd_compute_lip(F, E, CS, pts, G, dist_cache);
         lip_history(iter+1) = lip_curr;
         fprintf('  Iter %3d:  Lip = %.4f  (swaps: %d)\n', iter, lip_curr, n_swaps);
 
@@ -204,6 +244,30 @@ for ni = 1:length(N_values)
     ylabel('Lip(F)');
     title(sprintf('Coordinate descent convergence (N=%d)', N));
     grid on;
+
+    %% Displacement plot
+    img_pts = pts(F(interior_idx), :);
+    dx = img_pts(:,1) - pts(interior_idx,1);
+    dy = img_pts(:,2) - pts(interior_idx,2);
+    moved = (abs(dx) + abs(dy)) > 1e-10;
+
+    fprintf('Nodes with arrows: %d / %d\n', sum(moved), length(interior_idx));
+
+    figure; hold on; axis equal;
+    xlim([0 1]); ylim([0 1]);
+    title(sprintf('Displacement of F* (N=%d, Lip=%.4f)', N, lip_curr));
+    xlabel('x'); ylabel('y');
+
+    for k = 1:numel(slits)
+        plot([slits(k).x slits(k).x], [slits(k).y0 slits(k).y1], ...
+            'k-', 'LineWidth', 2);
+    end
+    plot(pts(interior_idx,1), pts(interior_idx,2), '.', ...
+        'Color', [0.85 0.85 0.85], 'MarkerSize', 3);
+    quiver(pts(interior_idx(moved),1), pts(interior_idx(moved),2), ...
+           dx(moved), dy(moved), 0, ...
+           'Color', [0.2 0.5 0.9], 'LineWidth', 1.2, 'MaxHeadSize', 0.5);
+    hold off;
 
 end
 
