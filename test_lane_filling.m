@@ -48,17 +48,17 @@ G_X   = hl_build_graph_from_points(pts_X, slits);
 close all;
 fprintf('Domain nodes: %d  |  X_N nodes: %d\n', size(pts_D_full,1), size(pts_X,1));
 
-% %% Build lane filling on full domain
-% fprintf('Building lane filling...\n');
-% tic
-% [F_full, ~] = hl_lane_filling(pts_D_full, slits, G_X, pts_X);
-% fprintf('  Done: %.3f sec\n', toc);
-
-%% Build top filling on full domain
-fprintf('Building top filling...\n');
+%% Build lane filling on full domain
+fprintf('Building lane filling...\n');
 tic
-[F_full, ~] = hl_top_filling(pts_D_full, slits, G_X, pts_X, slit_cols);
+[F_full, ~] = hl_lane_filling(pts_D_full, slits, G_X, pts_X);
 fprintf('  Done: %.3f sec\n', toc);
+
+% %% Build top filling on full domain
+% fprintf('Building top filling...\n');
+% tic
+% [F_full, ~] = hl_top_filling(pts_D_full, slits, G_X, pts_X, slit_cols);
+% fprintf('  Done: %.3f sec\n', toc);
 
 
 %% Optionally restrict domain to slit-adjacent columns
@@ -256,9 +256,11 @@ for k = 1:numel(slits)
 end
 plot(pts_X(:,1), pts_X(:,2), '.', 'Color', [0.88 0.88 0.88], 'MarkerSize', 3);
 if any(moved)
-    quiver(pts_D(interior_D(moved),1), pts_D(interior_D(moved),2), ...
-           dx(moved), dy(moved), 0, ...
-           'Color', [0.2 0.5 0.9], 'LineWidth', 1.2, 'MaxHeadSize', 0.5);
+    % quiver(pts_D(interior_D(moved),1), pts_D(interior_D(moved),2), ...
+    %        dx(moved), dy(moved), 0, ...
+    %        'Color', [0.2 0.5 0.9], 'LineWidth', 1.2, 'MaxHeadSize', 0.5);
+
+    draw_colored_arrows(pts_D(interior_D,1), pts_D(interior_D,2), dx, dy, 'MaxMag', 1);
 end
 if compute_lip
     plot(path_coords(:,1), path_coords(:,2), 'g-', 'LineWidth', 2.5);
