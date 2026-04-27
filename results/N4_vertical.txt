@@ -1,0 +1,282 @@
+Building domain graph G_D...
+Domain graph: 16641 nodes, 65792 edges
+Building slit domain graph G_X...
+Grid nodes: 15900
+Graph edges: 60264
+Domain nodes: 16641  |  X_N nodes: 15900
+Building top filling...
+Top filling: boundary violations = 0
+Top filling: nodes that moved    = 15875 / 16641
+Building radius neighbor lists...
+  Done.
+Caching image-node distance rows...
+  Done: 1.477 sec
+Computing initial Lip...
+  Done: 6.914 sec
+Initial Lip(c_bar_4) = 126.8284
+Recording video: descent_N4.mp4
+Warning: The video's width and height has been padded to be a multiple of two as required by the
+H.264 codec. 
+
+Running coordinate descent...
+  Iter   1: 31 nodes at worst ratio 126.8284
+           -> Lip = 126.0000  (swaps: 31)
+  Iter   2: 96 nodes at worst ratio 126.0000
+           -> Lip = 125.4142  (swaps: 96)
+  Iter   3: 31 nodes at worst ratio 125.4142
+           -> Lip = 125.0000  (swaps: 31)
+  Iter   4: 96 nodes at worst ratio 125.0000
+           -> Lip = 124.4142  (swaps: 96)
+  Iter   5: 33 nodes at worst ratio 124.4142
+           -> Lip = 124.0000  (swaps: 33)
+  Iter   6: 96 nodes at worst ratio 124.0000
+           -> Lip = 123.4142  (swaps: 96)
+  Iter   7: 33 nodes at worst ratio 123.4142
+           -> Lip = 123.0000  (swaps: 33)
+  Iter   8: 98 nodes at worst ratio 123.0000
+           -> Lip = 122.4142  (swaps: 98)
+  Iter   9: 33 nodes at worst ratio 122.4142
+           -> Lip = 122.0000  (swaps: 33)
+  Iter  10: 100 nodes at worst ratio 122.0000
+           -> Lip = 121.4142  (swaps: 100)
+  Iter  11: 33 nodes at worst ratio 121.4142
+           -> Lip = 121.0000  (swaps: 33)
+  Iter  12: 102 nodes at worst ratio 121.0000
+           -> Lip = 120.4142  (swaps: 102)
+  Iter  13: 33 nodes at worst ratio 120.4142
+           -> Lip = 120.0000  (swaps: 33)
+  Iter  14: 104 nodes at worst ratio 120.0000
+           -> Lip = 119.4142  (swaps: 104)
+  Iter  15: 33 nodes at worst ratio 119.4142
+           -> Lip = 119.0000  (swaps: 33)
+  Iter  16: 106 nodes at worst ratio 119.0000
+           -> Lip = 118.4142  (swaps: 106)
+  Iter  17: 33 nodes at worst ratio 118.4142
+           -> Lip = 118.0000  (swaps: 33)
+  Iter  18: 108 nodes at worst ratio 118.0000
+           -> Lip = 117.4142  (swaps: 108)
+  Iter  19: 33 nodes at worst ratio 117.4142
+           -> Lip = 117.0000  (swaps: 33)
+  Iter  20: 110 nodes at worst ratio 117.0000
+           -> Lip = 116.4142  (swaps: 110)
+  Iter  21: 33 nodes at worst ratio 116.4142
+           -> Lip = 116.0000  (swaps: 33)
+  Iter  22: 112 nodes at worst ratio 116.0000
+           -> Lip = 115.4142  (swaps: 112)
+  Iter  23: 33 nodes at worst ratio 115.4142
+           -> Lip = 115.0000  (swaps: 33)
+  Iter  24: 114 nodes at worst ratio 115.0000
+           -> Lip = 114.4142  (swaps: 114)
+  Iter  25: 33 nodes at worst ratio 114.4142
+           -> Lip = 114.0000  (swaps: 33)
+  Iter  26: 116 nodes at worst ratio 114.0000
+           -> Lip = 113.4142  (swaps: 116)
+  Iter  27: 33 nodes at worst ratio 113.4142
+           -> Lip = 113.0000  (swaps: 33)
+  Iter  28: 118 nodes at worst ratio 113.0000
+           -> Lip = 112.4142  (swaps: 118)
+  Iter  29: 33 nodes at worst ratio 112.4142
+           -> Lip = 112.0000  (swaps: 33)
+  Iter  30: 120 nodes at worst ratio 112.0000
+           -> Lip = 111.4142  (swaps: 120)
+  Iter  31: 33 nodes at worst ratio 111.4142
+           -> Lip = 111.0000  (swaps: 33)
+  Iter  32: 122 nodes at worst ratio 111.0000
+           -> Lip = 110.4142  (swaps: 122)
+  Iter  33: 33 nodes at worst ratio 110.4142
+           -> Lip = 110.0000  (swaps: 33)
+  Iter  34: 124 nodes at worst ratio 110.0000
+           -> Lip = 109.4142  (swaps: 124)
+  Iter  35: 33 nodes at worst ratio 109.4142
+           -> Lip = 109.0000  (swaps: 33)
+  Iter  36: 126 nodes at worst ratio 109.0000
+           -> Lip = 108.4142  (swaps: 126)
+  Iter  37: 33 nodes at worst ratio 108.4142
+           -> Lip = 108.0000  (swaps: 33)
+  Iter  38: 128 nodes at worst ratio 108.0000
+           -> Lip = 107.4142  (swaps: 128)
+  Iter  39: 33 nodes at worst ratio 107.4142
+           -> Lip = 107.0000  (swaps: 33)
+  Iter  40: 130 nodes at worst ratio 107.0000
+           -> Lip = 106.4142  (swaps: 130)
+  Iter  41: 33 nodes at worst ratio 106.4142
+           -> Lip = 106.0000  (swaps: 33)
+  Iter  42: 132 nodes at worst ratio 106.0000
+           -> Lip = 105.4142  (swaps: 132)
+  Iter  43: 33 nodes at worst ratio 105.4142
+           -> Lip = 105.0000  (swaps: 33)
+  Iter  44: 134 nodes at worst ratio 105.0000
+           -> Lip = 104.4142  (swaps: 134)
+  Iter  45: 33 nodes at worst ratio 104.4142
+           -> Lip = 104.0000  (swaps: 33)
+  Iter  46: 136 nodes at worst ratio 104.0000
+           -> Lip = 103.4142  (swaps: 136)
+  Iter  47: 33 nodes at worst ratio 103.4142
+           -> Lip = 103.0000  (swaps: 33)
+  Iter  48: 138 nodes at worst ratio 103.0000
+           -> Lip = 102.4142  (swaps: 138)
+  Iter  49: 33 nodes at worst ratio 102.4142
+           -> Lip = 102.0000  (swaps: 33)
+  Iter  50: 140 nodes at worst ratio 102.0000
+           -> Lip = 101.4142  (swaps: 140)
+  Iter  51: 33 nodes at worst ratio 101.4142
+           -> Lip = 101.0000  (swaps: 33)
+  Iter  52: 142 nodes at worst ratio 101.0000
+           -> Lip = 100.4142  (swaps: 142)
+  Iter  53: 33 nodes at worst ratio 100.4142
+           -> Lip = 100.0000  (swaps: 33)
+  Iter  54: 144 nodes at worst ratio 100.0000
+           -> Lip = 99.4142  (swaps: 144)
+  Iter  55: 33 nodes at worst ratio 99.4142
+           -> Lip = 99.0000  (swaps: 33)
+  Iter  56: 146 nodes at worst ratio 99.0000
+           -> Lip = 98.4142  (swaps: 146)
+  Iter  57: 33 nodes at worst ratio 98.4142
+           -> Lip = 98.0000  (swaps: 33)
+  Iter  58: 148 nodes at worst ratio 98.0000
+           -> Lip = 97.4142  (swaps: 148)
+  Iter  59: 33 nodes at worst ratio 97.4142
+           -> Lip = 97.0000  (swaps: 33)
+  Iter  60: 150 nodes at worst ratio 97.0000
+           -> Lip = 96.4142  (swaps: 150)
+  Iter  61: 33 nodes at worst ratio 96.4142
+           -> Lip = 96.0000  (swaps: 33)
+  Iter  62: 152 nodes at worst ratio 96.0000
+           -> Lip = 95.4142  (swaps: 152)
+  Iter  63: 33 nodes at worst ratio 95.4142
+           -> Lip = 95.0000  (swaps: 33)
+  Iter  64: 154 nodes at worst ratio 95.0000
+           -> Lip = 94.4142  (swaps: 154)
+  Iter  65: 33 nodes at worst ratio 94.4142
+           -> Lip = 94.0000  (swaps: 33)
+  Iter  66: 156 nodes at worst ratio 94.0000
+           -> Lip = 93.4142  (swaps: 156)
+  Iter  67: 33 nodes at worst ratio 93.4142
+           -> Lip = 93.0000  (swaps: 33)
+  Iter  68: 158 nodes at worst ratio 93.0000
+           -> Lip = 92.4142  (swaps: 158)
+  Iter  69: 33 nodes at worst ratio 92.4142
+           -> Lip = 92.0000  (swaps: 33)
+  Iter  70: 160 nodes at worst ratio 92.0000
+           -> Lip = 91.4142  (swaps: 160)
+  Iter  71: 33 nodes at worst ratio 91.4142
+           -> Lip = 91.0000  (swaps: 33)
+  Iter  72: 162 nodes at worst ratio 91.0000
+           -> Lip = 90.4142  (swaps: 162)
+  Iter  73: 33 nodes at worst ratio 90.4142
+           -> Lip = 90.0000  (swaps: 33)
+  Iter  74: 164 nodes at worst ratio 90.0000
+           -> Lip = 89.4142  (swaps: 164)
+  Iter  75: 33 nodes at worst ratio 89.4142
+           -> Lip = 89.0000  (swaps: 33)
+  Iter  76: 166 nodes at worst ratio 89.0000
+           -> Lip = 88.4142  (swaps: 166)
+  Iter  77: 33 nodes at worst ratio 88.4142
+           -> Lip = 88.0000  (swaps: 33)
+  Iter  78: 168 nodes at worst ratio 88.0000
+           -> Lip = 87.4142  (swaps: 168)
+  Iter  79: 33 nodes at worst ratio 87.4142
+           -> Lip = 87.0000  (swaps: 33)
+  Iter  80: 170 nodes at worst ratio 87.0000
+           -> Lip = 86.4142  (swaps: 170)
+  Iter  81: 33 nodes at worst ratio 86.4142
+           -> Lip = 86.0000  (swaps: 33)
+  Iter  82: 172 nodes at worst ratio 86.0000
+           -> Lip = 85.4142  (swaps: 172)
+  Iter  83: 33 nodes at worst ratio 85.4142
+           -> Lip = 85.0000  (swaps: 33)
+  Iter  84: 174 nodes at worst ratio 85.0000
+           -> Lip = 84.4142  (swaps: 174)
+  Iter  85: 33 nodes at worst ratio 84.4142
+           -> Lip = 84.0000  (swaps: 33)
+  Iter  86: 176 nodes at worst ratio 84.0000
+           -> Lip = 83.4142  (swaps: 176)
+  Iter  87: 33 nodes at worst ratio 83.4142
+           -> Lip = 83.0000  (swaps: 33)
+  Iter  88: 178 nodes at worst ratio 83.0000
+           -> Lip = 82.4142  (swaps: 178)
+  Iter  89: 33 nodes at worst ratio 82.4142
+           -> Lip = 82.0000  (swaps: 33)
+  Iter  90: 180 nodes at worst ratio 82.0000
+           -> Lip = 81.4142  (swaps: 180)
+  Iter  91: 33 nodes at worst ratio 81.4142
+           -> Lip = 81.0000  (swaps: 33)
+  Iter  92: 182 nodes at worst ratio 81.0000
+           -> Lip = 80.4142  (swaps: 182)
+  Iter  93: 33 nodes at worst ratio 80.4142
+           -> Lip = 80.0000  (swaps: 33)
+  Iter  94: 184 nodes at worst ratio 80.0000
+           -> Lip = 79.4142  (swaps: 184)
+  Iter  95: 33 nodes at worst ratio 79.4142
+           -> Lip = 79.0000  (swaps: 33)
+  Iter  96: 186 nodes at worst ratio 79.0000
+           -> Lip = 78.4142  (swaps: 186)
+  Iter  97: 33 nodes at worst ratio 78.4142
+           -> Lip = 78.0000  (swaps: 33)
+  Iter  98: 188 nodes at worst ratio 78.0000
+           -> Lip = 77.4142  (swaps: 188)
+  Iter  99: 33 nodes at worst ratio 77.4142
+           -> Lip = 77.0000  (swaps: 33)
+  Iter 100: 190 nodes at worst ratio 77.0000
+           -> Lip = 76.4142  (swaps: 190)
+  Iter 101: 33 nodes at worst ratio 76.4142
+           -> Lip = 76.0000  (swaps: 33)
+  Iter 102: 192 nodes at worst ratio 76.0000
+           -> Lip = 75.4142  (swaps: 192)
+  Iter 103: 33 nodes at worst ratio 75.4142
+           -> Lip = 75.0000  (swaps: 33)
+  Iter 104: 194 nodes at worst ratio 75.0000
+           -> Lip = 74.4142  (swaps: 194)
+  Iter 105: 33 nodes at worst ratio 74.4142
+           -> Lip = 74.0000  (swaps: 33)
+  Iter 106: 196 nodes at worst ratio 74.0000
+           -> Lip = 73.4142  (swaps: 196)
+  Iter 107: 33 nodes at worst ratio 73.4142
+           -> Lip = 73.0000  (swaps: 33)
+  Iter 108: 198 nodes at worst ratio 73.0000
+           -> Lip = 72.4142  (swaps: 198)
+  Iter 109: 33 nodes at worst ratio 72.4142
+           -> Lip = 72.0000  (swaps: 33)
+  Iter 110: 200 nodes at worst ratio 72.0000
+           -> Lip = 71.4142  (swaps: 200)
+  Iter 111: 33 nodes at worst ratio 71.4142
+           -> Lip = 71.0000  (swaps: 33)
+  Iter 112: 202 nodes at worst ratio 71.0000
+           -> Lip = 70.4142  (swaps: 202)
+  Iter 113: 33 nodes at worst ratio 70.4142
+           -> Lip = 70.0000  (swaps: 33)
+  Iter 114: 204 nodes at worst ratio 70.0000
+           -> Lip = 69.4142  (swaps: 204)
+  Iter 115: 33 nodes at worst ratio 69.4142
+           -> Lip = 69.0000  (swaps: 33)
+  Iter 116: 206 nodes at worst ratio 69.0000
+           -> Lip = 68.4142  (swaps: 206)
+  Iter 117: 33 nodes at worst ratio 68.4142
+           -> Lip = 68.0000  (swaps: 33)
+  Iter 118: 208 nodes at worst ratio 68.0000
+           -> Lip = 67.4142  (swaps: 208)
+  Iter 119: 33 nodes at worst ratio 67.4142
+           -> Lip = 67.0000  (swaps: 33)
+  Iter 120: 210 nodes at worst ratio 67.0000
+           -> Lip = 66.4142  (swaps: 210)
+  Iter 121: 33 nodes at worst ratio 66.4142
+           -> Lip = 66.0000  (swaps: 33)
+  Iter 122: 212 nodes at worst ratio 66.0000
+           -> Lip = 65.4142  (swaps: 212)
+  Iter 123: 33 nodes at worst ratio 65.4142
+           -> Lip = 65.4142  (swaps: 32)
+  Converged at iteration 123.
+Video saved: descent_N4.mp4
+
+========== Results (N=4) ==========
+  Initial Lip: 126.8284
+  Final   Lip: 65.4142
+  Improvement: 61.4142
+Warning: Error in state of SceneNode.
+String scalar or character vector must have valid interpreter syntax:
+\\bar{c}_4 convergence  (MaxN=6)
+ 
+Warning: Error in state of SceneNode.
+String scalar or character vector must have valid interpreter syntax:
+Lip(\\bar{c}_N)
+ 

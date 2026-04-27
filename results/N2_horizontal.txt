@@ -1,0 +1,84 @@
+Building domain graph G_D...
+Domain graph: 16641 nodes, 65792 edges
+Building slit domain graph G_X...
+Grid nodes: 16348
+Graph edges: 63720
+Domain nodes: 16641  |  X_N nodes: 16348
+Building top filling...
+Lane filling: boundary violations = 0
+Lane filling: nodes that moved    = 143 / 16641
+Building radius neighbor lists...
+  Done.
+Caching image-node distance rows...
+  Done: 36.746 sec
+Computing initial Lip...
+  Done: 7.020 sec
+Initial Lip(c_bar_2) = 66.8284
+Recording video: descent_lane_N2.mp4
+Warning: The video's width and height has been padded to be a multiple of two as required by the
+H.264 codec. 
+
+Running coordinate descent...
+  Iter   1: 2 nodes at worst ratio 66.8284
+           -> Lip = 64.8284  (swaps: 2)
+  Iter   2: 6 nodes at worst ratio 64.8284
+           -> Lip = 62.8284  (swaps: 6)
+  Iter   3: 10 nodes at worst ratio 62.8284
+           -> Lip = 60.8284  (swaps: 10)
+  Iter   4: 14 nodes at worst ratio 60.8284
+           -> Lip = 58.8284  (swaps: 14)
+  Iter   5: 18 nodes at worst ratio 58.8284
+           -> Lip = 56.8284  (swaps: 18)
+  Iter   6: 22 nodes at worst ratio 56.8284
+           -> Lip = 54.8284  (swaps: 22)
+  Iter   7: 26 nodes at worst ratio 54.8284
+           -> Lip = 52.8284  (swaps: 26)
+  Iter   8: 30 nodes at worst ratio 52.8284
+           -> Lip = 50.8284  (swaps: 30)
+  Iter   9: 34 nodes at worst ratio 50.8284
+           -> Lip = 48.8284  (swaps: 34)
+  Iter  10: 38 nodes at worst ratio 48.8284
+           -> Lip = 47.2548  (swaps: 38)
+  Iter  11: 4 nodes at worst ratio 47.2548
+           -> Lip = 46.8284  (swaps: 2)
+  Iter  12: 38 nodes at worst ratio 46.8284
+           -> Lip = 46.5477  (swaps: 38)
+  Iter  13: 4 nodes at worst ratio 46.5477
+           -> Lip = 45.8284  (swaps: 4)
+  Iter  14: 4 nodes at worst ratio 45.8284
+           -> Lip = 44.8284  (swaps: 2)
+  Iter  15: 46 nodes at worst ratio 44.8284
+           -> Lip = 44.4264  (swaps: 45)
+  Iter  16: 2 nodes at worst ratio 44.4264
+           -> Lip = 43.7193  (swaps: 1)
+  Iter  17: 4 nodes at worst ratio 43.7193
+           -> Lip = 43.0122  (swaps: 3)
+  Iter  18: 2 nodes at worst ratio 43.0122
+           -> Lip = 42.8284  (swaps: 1)
+  Iter  19: 46 nodes at worst ratio 42.8284
+           -> Lip = 42.3051  (swaps: 46)
+  Iter  20: 4 nodes at worst ratio 42.3051
+           -> Lip = 41.5980  (swaps: 2)
+  Iter  21: 4 nodes at worst ratio 41.5980
+           -> Lip = 40.8284  (swaps: 4)
+  Iter  22: 54 nodes at worst ratio 40.8284
+           -> Lip = 39.8284  (swaps: 52)
+  Iter  23: 4 nodes at worst ratio 39.8284
+           -> Lip = 39.4767  (swaps: 2)
+  Iter  24: 4 nodes at worst ratio 39.4767
+           -> Lip = 39.4767  (swaps: 0)
+  Converged at iteration 24.
+Video saved: descent_lane_N2.mp4
+
+========== Results (N=2) ==========
+  Initial Lip: 66.8284
+  Final   Lip: 39.4767
+  Improvement: 27.3518
+Warning: Error in state of SceneNode.
+String scalar or character vector must have valid interpreter syntax:
+\\bar{c}_2 convergence  (MaxN=6)
+ 
+Warning: Error in state of SceneNode.
+String scalar or character vector must have valid interpreter syntax:
+Lip(\\bar{c}_N)
+ 
