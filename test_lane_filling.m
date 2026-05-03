@@ -21,12 +21,12 @@
 clear; clc;
 
 %% ---- Parameters (edit these) ----
-N            = 2;
+N            = 4;
 MaxN_min     = N + 2;   % minimum to resolve X_N (do not go below this)
 MaxN_max     = 6;       % memory cap (beyond this, distance matrix too large)
-MaxN         = 4 %min(max(N + 2, MaxN_min), MaxN_max);  % auto, override manually
-compute_lip  = true;
-exhaustive   = true;   % WARNING: only use when MaxN <= 4
+MaxN         = 6 %min(max(N + 2, MaxN_min), MaxN_max);  % auto, override manually
+compute_lip  = false;
+exhaustive   = false;   % WARNING: only use when MaxN <= 4
 slit_cols    = false;   % restrict domain to slit-adjacent columns
 %% ---------------------------------
 

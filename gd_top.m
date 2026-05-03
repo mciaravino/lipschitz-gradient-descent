@@ -21,11 +21,11 @@
 clear; clc;
 
 %% ---- Parameters ----
-N            = 2;
-MaxN         = N + 2;
+N            = 3;
+MaxN         = 6;
 max_iters    = 100;
-record_video = false;  % set true to capture mp4
-show_plots   = false;  % set true to show mapping plots
+record_video = true;  % set true to capture mp4
+show_plots   = true;  % set true to show mapping plots
 %% -------------------
 
 r   = 1./(1:(N+2));

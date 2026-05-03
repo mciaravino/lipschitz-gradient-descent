@@ -1,1 +1,38 @@
-*.mp4
+# MATLAB
+*.asv
+*.m~
+*.mex*
+*.mexa64
+*.mexmaci64
+*.mexw64
+*.mat.bak
+slprj/
+sccprj/
+
+# Editor backups
+*~
+.*.swp
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+ehthumbs.db
+desktop.ini
+
+# LaTeX (if you ever drop the poster source in here)
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.toc
+*.bbl
+*.blg
+*.nav
+*.snm
+*.vrb
